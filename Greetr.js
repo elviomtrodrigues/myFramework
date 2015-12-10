@@ -72,14 +72,31 @@
         },
         
         setLang: function(lang) {
-            /*if(supportedLangs.indexOf(lang)) {
-                this.language = lang;
-            } else {
-                throw 'Trying to set property "language" into an unknown language';
-            }*/
             this.language = lang;
             
             this.validate();
+            
+            return this;
+        },
+        
+        HTMLGreeting: function(selector, formal) {
+            if(!$) {
+                throw 'jQuery not loaded';
+            }
+            
+            if(!selector) {
+                throw 'Missing jQuery selector'
+            }
+            
+            var msg;
+            
+            if (formal) {
+                msg = this.formalGreeting();
+            } else {
+                msg = this.greeting();
+            }
+            
+            $(selector).html(msg);
             
             return this;
         }
